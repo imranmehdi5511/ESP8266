@@ -5,15 +5,15 @@
 
 
 /* Device */
-const char* id_name = "ESP32-HTTP";
+const char* id_name = "DEVICE_ID_1";
 
 /* Network Configuration */
-const char* ssid_WiFi = "mySSID";
-const char* pass_WiFi = "myPASS";
+const char* ssid_WiFi = "FTTH-BELBRUNO.M";
+const char* pass_WiFi = "redbba12";
 
 /* HTTP Endpoint Configuration */
-const char* address = "192.168.1.131/sensor_data";  /* Endpoint address (HTTP), must NOT include 'http://xxx' or 'tcp://xxx' */
-int port = 8080;
+const char* address = "192.168.1.114/messages";  /* Endpoint address (HTTP), must NOT include 'http://xxx' or 'tcp://xxx' */
+int port = 3002;
 
 /* Enable Sensors */
 bool isEnable_TemperatureIntern = true;
@@ -30,7 +30,7 @@ bool isEnable_Gyroscope_Y = true;
 bool isEnable_Gyroscope_Z = true;
 
 /* Interval of time */
-long interval = 30;    /* Time in seconds between */
+long interval = 16;    /* Time in seconds between */
 
 
 #endif

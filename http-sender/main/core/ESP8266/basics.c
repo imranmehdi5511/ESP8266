@@ -1,3 +1,5 @@
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 #include <stdio.h>
 #include <errno.h>
 #include <stdint.h>
@@ -11,12 +13,7 @@
 #include "sensors/bh1750/bh1750.h"
 #include "sensors/acoustic/acoustic.h"
 
-/* ESP32 FreeRTOS DEPENDENCIES */
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "driver/gpio.h"
-#include "sdkconfig.h"
-#include "nvs_flash.h"
+
 
 char buffer[100];
 char* s;
