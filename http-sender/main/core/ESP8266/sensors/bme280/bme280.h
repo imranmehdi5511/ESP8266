@@ -7,7 +7,7 @@
 
 #define TICK_DELAY 10
 
-#define I2C_PORT_NUMBER 1
+#define I2C_PORT_NUMBER 0
 
 #define BME280_SENSOR_ADDR  0x76	/*Device Address/Identifier */
 #define WRITE_BIT 			I2C_MASTER_WRITE              /*!< I2C master write */
@@ -110,5 +110,6 @@ float compensateTemperature(int32_t t_fine);
 float compensatePressure(int32_t adc_P, bme280_calib_data *cal, int32_t t_fine);
 float compensateHumidity(int32_t adc_H, bme280_calib_data *cal, int32_t t_fine);
 void getRawData(bme280_raw_data *raw);
+char* str_float(float);	// Imported from MPU6050
 
 #endif

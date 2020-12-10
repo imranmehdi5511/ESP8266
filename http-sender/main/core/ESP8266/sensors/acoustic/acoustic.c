@@ -7,29 +7,27 @@
 #include "freertos/FreeRTOS.h"
 #include "driver/gpio.h"
 
-#define ACOUSTIC_ENABLE 22	// GPIO 23
-#define ACOUSTIC_DATA 21 // GPIO 22
+#define ACOUSTIC_ENABLE 12	// GPIO 23
+#define ACOUSTIC_DATA 14 // GPIO 22
 
 char buffer[100];
 char* s;
 
 bool check_acoustic()
 {
-//    if ( gpio_get_level(ACOUSTIC_ENABLE) ) 
-//	return false;
-//    else
+    if ( gpio_get_level(ACOUSTIC_ENABLE) ) 
+		return false;
+    else
     	return true;	
 }
 
 void init_acoustic(bool ft)
 {
-//    gpio_pad_select_gpio(ACOUSTIC_ENABLE);
-//    gpio_set_direction(ACOUSTIC_ENABLE, GPIO_MODE_INPUT);
-//    gpio_set_pull_mode(ACOUSTIC_ENABLE, GPIO_PULLUP_ONLY);	// Set PullUp
-//    
-//    gpio_pad_select_gpio(ACOUSTIC_DATA);
-//    gpio_set_direction(ACOUSTIC_DATA, GPIO_MODE_INPUT);
-//    gpio_set_pull_mode(ACOUSTIC_DATA, GPIO_PULLDOWN_ONLY);	// Set PullDown
+    gpio_set_direction(ACOUSTIC_ENABLE, GPIO_MODE_INPUT);
+    gpio_set_pull_mode(ACOUSTIC_ENABLE, GPIO_PULLUP_ONLY);	// Set PullUp
+    
+    gpio_set_direction(ACOUSTIC_DATA, GPIO_MODE_INPUT);
+    gpio_set_pull_mode(ACOUSTIC_DATA, GPIO_PULLDOWN_ONLY);	// Set PullDown
 } 
 
 void print_acoustic()
@@ -42,16 +40,15 @@ void print_acoustic()
 
 char* get_acoustic()
 {
-//    s = " ";
+    s = " ";
 
-//    if ( gpio_get_level(ACOUSTIC_DATA) ) 
-//	sprintf(buffer, "High");
-//    else
-//	sprintf(buffer, "Low");
+    if ( gpio_get_level(ACOUSTIC_DATA) ) 
+		sprintf(buffer, "High");
+    else
+		sprintf(buffer, "Low");
 
-//    s=buffer;
-//    return s;
-return "Low";
+    s=buffer;
+    return s;
 }
 
 

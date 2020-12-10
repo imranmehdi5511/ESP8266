@@ -5,7 +5,7 @@
 
 #define TICK_DELAY 10
 
-#define I2C_PORT_NUMBER 1
+#define I2C_PORT_NUMBER 0
 
 #define MPU6050_SENSOR_ADDR	0x68	/*Device Address/Identifier for MPU6050*/
 #define WRITE_BIT 			I2C_MASTER_WRITE              /*!< I2C master write */
@@ -31,5 +31,6 @@ bool check_mpu6050(void);
 void init_mpu6050(bool);
 void print_mpu6050(void);
 char* get_mpu6050(int);
+char* str_float(float);
 
 #endif
