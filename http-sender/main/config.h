@@ -8,8 +8,8 @@
 const char* id_name = "ESP8266-HTTP";
 
 /* Network Configuration */
-const char* ssid_WiFi = "FTTH-BELBRUNO.M";
-const char* pass_WiFi = "redbba12";
+const char* ssid_WiFi = "mySSID;
+const char* pass_WiFi = "myPASS";
 
 /* HTTP Endpoint Configuration */
 const char* address = "192.168.1.115/sensor_data";  /* Endpoint address (HTTP), must NOT include 'http://xxx' or 'tcp://xxx' */
