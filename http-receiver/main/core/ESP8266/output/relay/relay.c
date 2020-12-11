@@ -8,10 +8,10 @@
 #include "driver/gpio.h"
 
 #define NUM_RELAYS 4
-#define RELAY_1 6		// RELAY 1 in GPIO26
-#define RELAY_2 7		// RELAY 2 in GPIO27
-#define RELAY_3 11		// RELAY 3 in GPIO14
-#define RELAY_4 8		// RELAY 4 in GPIO12
+#define RELAY_1 5		// RELAY 1 in GPIO26
+#define RELAY_2 4		// RELAY 2 in GPIO27
+#define RELAY_3 0		// RELAY 3 in GPIO14
+#define RELAY_4 2		// RELAY 4 in GPIO12
 
 const int num[NUM_RELAYS] = { RELAY_1, RELAY_2, RELAY_3,  RELAY_4};
 
