@@ -5,7 +5,7 @@
 
 
 /* Device */
-const char* id_name = "DEVICE_ID_1";
+const char* id_name = "ESP8266-HTTP";
 
 /* Network Configuration */
 const char* ssid_WiFi = "FTTH-BELBRUNO.M";
@@ -30,7 +30,7 @@ bool isEnable_Gyroscope_Y = true;
 bool isEnable_Gyroscope_Z = true;
 
 /* Interval of time */
-long interval = 16;    /* Time in seconds between */
+long interval = 30;    /* Time in seconds between */
 
 
 #endif

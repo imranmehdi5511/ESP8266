@@ -7,7 +7,7 @@
 #include "freertos/FreeRTOS.h"
 #include "driver/gpio.h"
 
-#define GREEN_LED 2
+#define GREEN_LED 16
 #define RED_LED 15
 
 

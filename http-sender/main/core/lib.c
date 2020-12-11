@@ -80,10 +80,10 @@ void led_blinks(int led, int iter, int usec)	// LED Blink function-> led: 0 Gree
     int i;
     for (i=0;i<iter;i++)
     {
-	led_GPIO(led, 1);
-	udelay_basics (usec);
-	led_GPIO(led, 0);
-	udelay_basics (usec);
+		led_GPIO(led, 1);
+		udelay_basics (usec);
+		led_GPIO(led, 0);
+		udelay_basics (usec);
     }
 }
 
