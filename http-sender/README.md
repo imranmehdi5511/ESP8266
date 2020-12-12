@@ -1,68 +1,67 @@
 # ESP8266 Sender with I2T Sensors Stack  -- HTTP Protocol
 
-#IN PROGRESS...
+***ESP8266*** is one of the microcontrollers for IoT applications par excellence. Created and manufactured by Espressif, it was the first microcontroller of this company to become popular, it is widely used for both educational and industrial development due to its great versatility, reliability and very low cost. 
 
-ESP32 is one of the microcontrollers for *IoT applications* par excellence. It is widely used for both educational and industrial development due to its great versatility, reliability and low cost. At *I2T* we wanted to add it due to its extensive use in the development community.
+This Repository contains the source code and the steps to follow to be able to make ***ESP8266 Microcontroller*** *read sensor data and send it*, in an organized way, to the **[Tangle](https://www.youtube.com/watch?v=ESF8UZM70wU) (DLT)** of the **[IOTA Network](https://www.iota.org/)** through the **[Streams](https://www.iota.org/solutions/streams)** layer.
 
-# Setting up your ESP32 with the I2T Sensors Stack
+
+# Setting up your ESP8266 with the I2T Sensors Stack
 
 This is the list of Sensors/Modules that you can connect and it will be recognized immediately.
-- ***BME280*** (*Bosch*) - Temperature, Humidity and Pressure sensor. -> Connected by *I2C Bus* via: *GPIO33/SDA* and *GPIO32/SCL* --- Be careful with the supply of this sensor, the BM280 is powered with 3.3V, if your module does not have a voltage regulator (some modules do not have it) the sensor can be damaged if you supply 5V.
-- ***MPU6050*** (*InvenSense-TDK*) - Acelerometer and Gyroscope 6-axis. -> Connected by *I2C Bus* via: *GPIO33/SDA* and *GPIO32/SCL*.
-- ***BH1750*** (*ROHM*) - Ambient Light Sensor. -> Connected by *I2C Bus* via: *GPIO33/SDA* and *GPIO32/SCL*.
-- ***Generic Adjustable Sound Sensor with digital output*** (like *KY038 Module*) - -> Digital Signal on *GPIO21*, *GPIO22* to GND (to enable sound data collection).
-- Also, you can connect a ***Green LED*** in *GPIO2* that blink when the data is sent to the Tangle, and a ***Red LED*** in *GPIO15* that will Blink in a certain way when it detects certain errors (totally optional)
+- ***BME280*** (*Bosch*) - Temperature, Humidity and Pressure sensor. -> Connected by *I2C Bus* via: *GPIO4/SDA* and *GPIO5/SCL* --- Be careful with the supply of this sensor, the BM280 is powered with 3.3V, if your module does not have a voltage regulator (some modules do not have it) the sensor can be damaged if you supply 5V.
+- ***MPU6050*** (*InvenSense-TDK*) - Acelerometer and Gyroscope 6-axis. -> Connected by *I2C Bus* via: *GPIO4/SDA* and *GPIO5/SCL*.
+- ***BH1750*** (*ROHM*) - Ambient Light Sensor. -> Connected by *I2C Bus* via: *GPIO4/SDA* and *GPIO5/SCL*.
+- ***Generic Adjustable Sound Sensor with digital output*** (like *KY038 Module*) - -> Digital Signal on *GPIO0*, *GPIO2* to GND (to enable sound data collection).
+- Also, you can connect a ***Green LED*** in *GPIO16* that blink when the data is sent to the Tangle, and a ***Red LED*** in *GPIO15* that will Blink in a certain way when it detects certain errors (totally optional)
 
 ## Connecting the sensors
 
-The following diagram explains how each sensor of our stack must be connected to the ESP32 pins. The "NodeMCU-32s" development board has been used in this diagram, which contains the ESP32 microcontroller. However, any development board that contains the ESP32 microcontroller can be used.
+The following diagram explains how each sensor of our stack must be connected to the ESP8266 pins. The "NodeMCU v2 (or also v3)" development board has been used in this diagram, which contains the ESP32 microcontroller. However, any development board that contains the ESP32 microcontroller can be used.
 
 ![I2T Hardware Connections of ESP8266](https://i.postimg.cc/LXJpdFZw/ESP8266-sender.png)
 
-**It is not necessary to have all the sensors listed here**, the code is able to detect which sensors were connected. In the case of not connecting any sensor, the only real data that will be displayed on the Tangle will be the Internal Temperature of *ESP32*.
+**It is not necessary to have all the sensors listed here**, the code is able to detect which sensors were connected. In the case of not connecting any sensor, the only real data that will be displayed on the Tangle will be the Internal Voltage of *ESP8266*.
 
-***IMPORTANT NOTE:*** *Espressif has deprecated the ESP32's internal temperature sensor a few years ago, as it has proven not to be a very accurate measurement. However we will use it as a minimum unit of information to be able to send data to the Tangle without having sensors connected. Please keep this in mind, so this value should not be taken into account for critical applications.*
-
-# Download Firmware on ESP32
-This repository uses the ***Iot2Tangle C Core devices*** adapted for ***ESP32-FreeRTOS*** offered in the official *Espressif Toolchain ESP-IDF SDK*. Once the SDK is installed you will have all the tools to compile and download the program on your ESP32.
+# Download Firmware on ESP8266
+This repository uses the ***Iot2Tangle C Core devices*** adapted for ***ESP8266-FreeRTOS*** offered in the official *Espressif Toolchain ESP-IDF SDK*. Once the SDK is installed you will have all the tools to compile and download the program on your ESP8266.
 
 
 ## 1) Install ESP-IDF SDK:
 ### Windows:
 The easiest way to install ESP-IDF and their prerequisites is to download the ESP-IDF Tools installer from this URL:
-<https://dl.espressif.com/dl/esp-idf-tools-setup-2.3.exe>
+<https://dl.espressif.com/dl/esp32_win32_msys2_environment_and_toolchain-20181001.zip>
 
-Just follow the steps and you will have the official *Espressif SDK Toolchain* installed on your computer.
+Unzip the zip file to *C:\* (or some other location, but this guide assumes *C:\*) and it will create an *msys32 directory* with a pre-prepared environment.
 
-To check other methods, the following page is suggested: 
-<https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/windows-setup.html>
+To check more information or other installations methods, the following page is suggested: 
+<https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/windows-setup.html>
 
 ### Linux and macOS:
 Prerequisites of ESP-IDF SDK:
 ```
 sudo apt update
-sudo apt install git wget flex bison gperf python python-pip python-setuptools cmake ninja-build ccache libffi-dev libssl-dev
+sudo apt install git wget flex bison gperf python python-pip python-setuptools cmake ninja-build ccache libffi-dev libssl-dev libncurses5-dev libncursesw5-dev
 ```
-It is recommended to install the stable version: ESP-IDF v4.1, you can download it from here:
+It is recommended to install the lastest version, you can download it from here:
 ```
-git clone -b v4.1 --recursive https://github.com/espressif/esp-idf.git
+git clone --recursive https://github.com/espressif/ESP8266_RTOS_SDK.git
 ```
 Now install the SDK, this may take a while:
 ```
-cd ~/esp-idf
+cd ~/ESP8266_RTOS_SDK
 ./install.sh
 . ./export.sh
 ```
 After doing this last step do not close the shell, as we will compile and flash from here. If you close the shell you will have to do the previous step again.
 
-## 2) Download the Iot2Tangle ESP32 Repository and go to the 'http-sender' folder:
+## 2) Download the Iot2Tangle ESP8266 Repository and go to the 'http-sender' folder:
 You can download the repository directly from Github, or from shell or Command Prompt with the following command:
 ```
-git clone https://github.com/iot2tangle/ESP32.git
-cd ESP32/http-sender
+git clone https://github.com/iot2tangle/ESP8266.git
+cd ESP8266/http-sender
 ```
 ## 3) Edit the file config.h
-The *config.h* file must be opened and modified, this file is in the directory *'ESP32/http-sender/main'* of the repository.
+The *config.h* file must be opened and modified, this file is in the directory *'ESP8266/http-sender/main'* of the repository.
 
 This step is very important if you want to make a connection to the gateway. Your *WiFi Credentials*, the *address* and *port* that will have the *I2T Streams HTTP Gateway* or *Keepy* running, the *Device Id*, and others configurations. The *Id Name Device* you define here must be between the devices you set in on the *Gateway configuration file*. 
 ```
@@ -102,7 +101,7 @@ idf.py -p COM1 flash    # COM1 is an Windows port example, you must put your por
 Upon completion, the firmware is downloaded to your ESP32. If the *I2T Streams HTTP Gateway* is configured correctly (we will explain this next), ***you will be sending data to Tangle via Streams***.
 
 # Debugging
-If configured correctly, *ESP32* should be sending data to the gateway automatically. However, you may want to verify that it is running on *ESP32*.
+If configured correctly, *ESP8266* should be sending data to the gateway automatically. However, you may want to verify that it is running on *ESP8266*.
 
 The code continuously sends information out the **serial port**, so it can read the serial port to see what is happening and detect errors.
 
