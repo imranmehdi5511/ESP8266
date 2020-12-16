@@ -28,13 +28,29 @@ This repository uses the ***Iot2Tangle C Core devices*** adapted for ***ESP8266-
 
 ## 1) Install ESP-IDF SDK:
 ### Windows:
-The easiest way to install ESP-IDF and their prerequisites is to download the ESP-IDF Tools installer from this URL:
+The easiest way to install ESP-IDF and their prerequisites is to download the ESP-IDF Windows Environment and Toolchain installer from this URL:
 <https://dl.espressif.com/dl/esp32_win32_msys2_environment_and_toolchain-20181001.zip>
 
-Unzip the zip file to *C:\* (or some other location, but this guide assumes *C:\*) and it will create an *msys32 directory* with a pre-prepared environment.
+Unzip the zip file to *C:\\* (or some other location, but this guide assumes *C:\\*) and it will create an *msys32 directory* with a pre-prepared environment.
 
-To check more information or other installations methods, the following page is suggested: 
-<https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/windows-setup.html>
+Open a **MSYS2 MINGW32** terminal window by running ***C:\msys32\mingw32.exe***. The environment in this window is a bash shell. Create a directory named esp that is a default location to develop ESP8266 applications and then the ***ESP8266_RTOS_SDK*** will be cloned. To do so, run the following shell commands:
+```
+mkdir esp
+cd esp
+git clone --recursive https://github.com/espressif/ESP8266_RTOS_SDK.git
+```
+Before continuing you must add some Python libraries that were not added in the ESP-IDF Windows Toolchain, probably because they were added later. So, run the following shell commands:
+```
+pip install click
+pip install pyelftools
+```
+Now install the SDK, this may take a while:
+```
+cd ESP8266_RTOS_SDK
+./install.sh
+. ./export.sh
+```
+After doing this last step do not close the shell, as we will compile and flash from here. If you close the shell you will have to do the previous step again.
 
 ### Linux and macOS:
 Prerequisites of ESP-IDF SDK:
@@ -55,8 +71,9 @@ cd ~/ESP8266_RTOS_SDK
 After doing this last step do not close the shell, as we will compile and flash from here. If you close the shell you will have to do the previous step again.
 
 ## 2) Download the Iot2Tangle ESP8266 Repository and go to the 'http-sender' folder:
-You can download the repository directly from Github, or from shell or Command Prompt with the following command:
+You can download the repository directly from Github, or from shell or Command Prompt with the following commands:
 ```
+cd ~
 git clone https://github.com/iot2tangle/ESP8266.git
 cd ESP8266/http-sender
 ```
