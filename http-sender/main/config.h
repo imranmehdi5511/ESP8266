@@ -8,7 +8,7 @@
 const char* id_name = "ESP8266-HTTP";
 
 /* Network Configuration */
-const char* ssid_WiFi = "mySSID;
+const char* ssid_WiFi = "mySSID";
 const char* pass_WiFi = "myPASS";
 
 /* HTTP Endpoint Configuration */
