@@ -1,4 +1,4 @@
-# ESP8266 Sender with I2T Sensors Stack  -- HTTP Protocol
+# ESP8266 Sender with I2T Sensors Stack  -- MQTT Protocol
 
 ***ESP8266*** is one of the microcontrollers for IoT applications par excellence. Created and manufactured by Espressif, it was the first microcontroller of this company to become popular, it is widely used for both educational and industrial development due to its great versatility, reliability and very low cost. 
 
@@ -70,27 +70,31 @@ cd ~/ESP8266_RTOS_SDK
 ```
 After doing this last step do not close the shell, as we will compile and flash from here. If you close the shell you will have to do the previous step again.
 
-## 2) Download the Iot2Tangle ESP8266 Repository and go to the 'http-sender' folder:
+## 2) Download the Iot2Tangle ESP8266 Repository and go to the 'mqtt-sender' folder:
 You can download the repository directly from Github, or from shell or Command Prompt with the following commands:
 ```
 cd ~
 git clone https://github.com/iot2tangle/ESP8266.git
-cd ESP8266/http-sender
+cd ESP8266/mqtt-sender
 ```
 ## 3) Edit the file config.h
-The *config.h* file must be opened and modified, this file is in the directory *'ESP8266/http-sender/main'* of the repository.
+The *config.h* file must be opened and modified, this file is in the directory *'ESP8266/mqtt-sender/main'* of the repository.
 
-This step is very important if you want to make a connection to the gateway. Your *WiFi Credentials*, the *address* and *port* that will have the *I2T Streams HTTP Gateway* or *Keepy* running, the *Device Id*, and others configurations. The *Id Name Device* you define here must be between the devices you set in on the *Gateway configuration file*. 
+This step is very important if you want to make a connection to the gateway. Your *WiFi Credentials*, the *address* and *port* that will have the *I2T Streams MQTT Gateway* (It is also possible to configure *username* and *password* in case the *Broker* has it), the *Device Id*, and others configurations. The *Id Name Device* you define here must be between the devices you set in on the *Gateway configuration file*. 
 ```
-const char* id_name = "ESP8266-HTTP";
+/* Device */
+const char* id_name = "ESP8266-MQTT";
 
 /* Network Configuration */
 const char* ssid_WiFi = "mySSID";
 const char* pass_WiFi = "myPASS";
 
-/* HTTP Endpoint Configuration */
-const char* address = "192.168.1.131/sensor_data";    /* Endpoint address (HTTP), must NOT include 'http://xxx' or 'tcp://xxx' */
-int port = 8080;
+/* Broker Configuration */
+const char* address = "mqtt.iot2tangle.link";  /* Broker address (MQTT), must NOT include 'http://xxx' or 'tcp://xxx' */
+int port = 8883;
+const char* topic = "iot2tangle";		/* MQTT topic */
+const char* user = "mqtti2t";			/* MQTT user */
+const char* password = "integrateeverything";	/* MQTT password */
 
 /* Enable Sensors */
 bool isEnable_TemperatureIntern = true;
@@ -101,6 +105,11 @@ bool isEnable_Humidity = true;
 /* Interval of time */
 long interval = 30;    /* Time in seconds between */
 ```
+In case of not using *Username* and *Password* in the *Broker*, leave these fields empty:
+```
+const char* user = "";      /* MQTT user */
+const char* password = "";  /* MQTT password */
+```
 ## 4) Compile and Download the Firmware:
 Remembering to have the ***ESP-IDF Toolchain*** open, and you make sure you are at the root of the *http-sender* folder run the following command:
 ```
@@ -108,9 +117,9 @@ idf.py build
 ```
 If the compilation was correct it should read: *Project build complete*.
 
-Now make sure you have ESP32 connected to your computer, and know what COM port it is connected to. (You can see this in 'Device Manager'). 
+Now make sure you have ESP8266 connected to your computer, and know what COM port it is connected to. (You can see this in 'Device Manager'). 
 
-Then run the following command that will start flashing the firmware. (You will probably have to press the reset button on your ESP32 development board, even several times for it to recognize the board.)
+Then run the following command that will start flashing the firmware. (You will probably have to press the reset button on your ESP8266 development board, even several times for it to recognize the board.)
 ```
 idf.py -p COM1 flash    # COM1 is an Windows port example, you must put your port. In Linux /dev/ttyUSB0 is an example, and in macOS: '/dev/cu' 
 ```
