@@ -108,9 +108,9 @@ idf.py build
 ```
 If the compilation was correct it should read: *Project build complete*.
 
-Now make sure you have ESP32 connected to your computer, and know what COM port it is connected to. (You can see this in 'Device Manager'). 
+Now make sure you have ESP8266 connected to your computer, and know what COM port it is connected to. (You can see this in 'Device Manager'). 
 
-Then run the following command that will start flashing the firmware. (You will probably have to press the reset button on your ESP32 development board, even several times for it to recognize the board.)
+Then run the following command that will start flashing the firmware. (You will probably have to press the reset button on your ESP8266 development board, even several times for it to recognize the board.)
 ```
 idf.py -p COM1 flash    # COM1 is an Windows port example, you must put your port. In Linux /dev/ttyUSB0 is an example, and in macOS: '/dev/cu' 
 ```
