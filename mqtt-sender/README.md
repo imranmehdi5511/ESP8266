@@ -37,7 +37,7 @@ Open a **MSYS2 MINGW32** terminal window by running ***C:\msys32\mingw32.exe***.
 ```
 mkdir esp
 cd esp
-git clone --recursive https://github.com/espressif/ESP8266_RTOS_SDK.git
+sudo git clone --recursive https://github.com/espressif/ESP8266_RTOS_SDK.git
 ```
 Before continuing you must add some Python libraries that were not added in the ESP-IDF Windows Toolchain, probably because they were added later. So, run the following shell commands:
 ```
@@ -61,7 +61,7 @@ sudo apt install git wget flex bison gperf python2-minimal python2 dh-python 2to
 ```
 It is recommended to install the lastest version, you can download it from here:
 ```
-git clone --recursive https://github.com/espressif/ESP8266_RTOS_SDK.git
+sudo git clone --recursive https://github.com/espressif/ESP8266_RTOS_SDK.git
 ```
 Now install the SDK, this may take a while:
 ```
