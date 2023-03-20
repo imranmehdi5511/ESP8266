@@ -56,7 +56,8 @@ After doing this last step do not close the shell, as we will compile and flash 
 Prerequisites of ESP-IDF SDK:
 ```
 sudo apt update
-sudo apt install git wget flex bison gperf python python-pip python-setuptools cmake ninja-build ccache libffi-dev libssl-dev libncurses5-dev libncursesw5-dev
+sudo apt install git wget flex bison gperf python2-minimal python2 dh-python 2to3 python-is-python3 python-pip python-setuptools cmake ninja-build ccache libffi-dev libssl-dev libncurses5-dev libncursesw5-dev
+
 ```
 It is recommended to install the lastest version, you can download it from here:
 ```
